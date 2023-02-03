@@ -75,8 +75,8 @@ export function New() {
           Criar hábito
         </Text>
 
-        <Text className="mt-6 text-white font-semibol text-base">
-          Qual o seu comprometimento?
+        <Text className="mt-6 text-white font-semibold text-base">
+          Qual seu comprometimento?
         </Text>
 
         <TextInput
@@ -87,16 +87,16 @@ export function New() {
           value={title}
         />
 
-        <Text className="font-semibold mt-4 mb-3 text-base">
+        <Text className="font-semibold mt-4 mb-3 text-white text-base">
           Qual a recorrência?
         </Text>
 
-        {availableWeekDays.map((weekDay, i) => (
+        {availableWeekDays.map((weekDay, index) => (
           <Checkbox
             key={weekDay}
             title={weekDay}
-            checked={weekDays.includes(i)}
-            onPress={() => handleToggleWeekDays(i)}
+            checked={weekDays.includes(index)}
+            onPress={() => handleToggleWeekDays(index)}
           />
         ))}
 
@@ -107,7 +107,9 @@ export function New() {
         >
           <Feather name="check" size={20} color={colors.white} />
 
-          <Text className="font-semibold text-base ml-2">Confirmar</Text>
+          <Text className="font-semibold text-base text-white ml-2">
+            Confirmar
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

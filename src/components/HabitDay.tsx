@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import dayjs from "dayjs";
-
 import {
   Dimensions,
   TouchableOpacity,
@@ -8,22 +7,29 @@ import {
 } from "react-native";
 import { generateProgressPercentage } from "../utils/generate-progress-percentage";
 
-const WEEK_DAYS = 7;
-const SCREEN_HORIZONTAL_PADDING = (23 * 2) / 5;
+const weekDay = 7;
+const screenHorizontalPadding = (32 * 2) / 5;
 
-export const DAY_MARGIN_BETWEEN = 8;
-export const DAY_SIZE =
-  Dimensions.get("screen").width / WEEK_DAYS - (SCREEN_HORIZONTAL_PADDING + 8);
+export const dayMarginBetween = 8;
+export const daySize =
+  Dimensions.get("screen").width / weekDay - (screenHorizontalPadding + 5);
 
-interface HabitDayProps extends TouchableOpacityProps {
-  date: Date;
+interface Props extends TouchableOpacityProps {
   amountOfHabits?: number;
   amountCompleted?: number;
+  date: Date;
 }
 
-export const HabitDay = ({ date, amountOfHabits = 0, amountCompleted = 0, ...rest }: HabitDayProps) => {
-  const amountAccomplishedPercentage = amountOfHabits > 0 ? generateProgressPercentage(amountOfHabits, amountCompleted) : 0;
-
+export function HabitDay({
+  amountOfHabits = 0,
+  amountCompleted = 0,
+  date,
+  ...rest
+}: Props) {
+  const amountAccomplishedPercentage =
+    amountOfHabits > 0
+      ? generateProgressPercentage(amountOfHabits, amountCompleted)
+      : 0;
   const today = dayjs().startOf("day").toDate();
   const isCurrentDay = dayjs(date).isSame(today);
 
@@ -43,11 +49,11 @@ export const HabitDay = ({ date, amountOfHabits = 0, amountCompleted = 0, ...res
           amountAccomplishedPercentage >= 60 &&
           amountAccomplishedPercentage < 80,
         ["bg-violet-500 border-violet-400"]: amountAccomplishedPercentage >= 80,
-        ["border-white border-3"]: isCurrentDay,
+        ["border-white border-4"]: isCurrentDay,
       })}
-      style={{ width: DAY_SIZE, height: DAY_SIZE }}
+      style={{ width: daySize, height: daySize }}
       activeOpacity={0.7}
       {...rest}
     />
   );
-};
+}
